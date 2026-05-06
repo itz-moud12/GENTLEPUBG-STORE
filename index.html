@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gentle PUBG Store</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-red: #ff0000;
+            --dark-red: #8b0000;
+            --black: #0a0a0a;
+            --dark-gray: #1a1a1a;
+            --gold: #ffd700;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a0000 50%, #0a0a0a 100%);
+            color: #fff;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: linear-gradient(90deg, rgba(139, 0, 0, 0.95), rgba(10, 0, 0, 0.95), rgba(139, 0, 0, 0.95));
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 15px 0;
+            border-bottom: 2px solid var(--primary-red);
+            box-shadow: 0 4px 20px rgba(255, 0, 0, 0.3);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 30px;
+        }
+
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, #ff0000, #ff6b6b, #ff0000);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(255, 0, 0, 0.5);
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-red);
+            transform: translateY(-2px);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-red);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Language Switcher */
+        .lang-switcher {
+            display: flex;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 5px 10px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 0, 0, 0.3);
+        }
+
+        .lang-btn {
+            background: none;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-size: 0.85rem;
+        }
+
+        .lang-btn.active {
+            background: linear-gradient(45deg, var(--primary-red), var(--dark-red));
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.4);
+        }
+
+        .lang-btn:hover {
+            background: rgba(255, 0, 0, 0.3);
+        }
+
+        /* Sign In Button */
+        .signin-btn {
+            background: linear-gradient(45deg, var(--primary-red), var(--dark-red));
+            border: none;
+            color: #fff;
+            padding: 10px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 0, 0, 0.4);
+        }
+
+        .signin-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(255, 0, 0, 0.6);
+        }
+
+        /* Main Content */
+        main {
+            position: relative;
+            z-index: 1;
+            padding-top: 80px;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 100px 20px 80px;
+            background: linear-gradient(180deg, rgba(139, 0, 0, 0.3), transparent);
+        }
+
+        .hero h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #ff0000, #ff6b6b, #ffd700, #ff0000);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 3s infinite;
+            letter-spacing: 3px;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.3); }
+        }
+
+        .slogan {
+            font-size: 1.5rem;
+            color: var(--gold);
+            font-weight: 700;
+            margin-bottom: 30px;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            font-style: italic;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--primary-red);
+            text-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: #aaa;
+            margin-top: 5px;
+        }
+
+        /* WhatsApp Channel Banner */
+        .wa-channel-banner {
+            max-width: 800px;
+            margin: 0 auto 40px;
+            background: linear-gradient(145deg, rgba(37, 211, 102, 0.15), rgba(18, 140, 126, 0.15));
+            border: 2px solid rgba(37, 211, 102, 0.4);
+            border-radius: 20px;
+            padding: 25px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+            animation: pulse-green 2s infinite;
+        }
+
+        @keyframes pulse-green {
+            0%, 100% { box-shadow: 0 0 20px rgba(37, 211, 102, 0.2); }
+            50% { box-shadow: 0 0 40px rgba(37, 211, 102, 0.4); }
+        }
+
+        .wa-channel-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .wa-channel-info i {
+            font-size: 2.5rem;
+            color: #25d366;
+        }
+
+        .wa-channel-text h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            color: #25d366;
+            margin-bottom: 5px;
+        }
+
+        .wa-channel-text p {
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        .wa-channel-btn {
+            background: linear-gradient(45deg, #25d366, #128c7e);
+            color: #fff;
+            text-decoration: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            white-space: nowrap;
+        }
+
+        .wa-channel-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 25px rgba(37, 211, 102, 0.5);
+        }
+
+        /* Section Styles */
+        .section {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 30px;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 50px;
+            background: linear-gradient(45deg, #ff0000, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--primary-red), transparent);
+        }
+
+        /* Product Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background: linear-gradient(145deg, rgba(26, 0, 0, 0.9), rgba(10, 0, 0, 0.9));
+            border: 2px solid rgba(255, 0, 0, 0.3);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-red);
+            box-shadow: 0 20px 40px rgba(255, 0, 0, 0.3);
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 0, 0, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .product-card:hover::before {
+            left: 100%;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 2px solid rgba(255, 0, 0, 0.3);
+        }
+
+        .product-info {
+            padding: 25px;
+        }
+
+        .product-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .product-desc {
+            color: #aaa;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .price-tag {
+            background: linear-gradient(145deg, rgba(255, 0, 0, 0.2), rgba(139, 0, 0, 0.3));
+            border: 1px solid rgba(255, 0, 0, 0.4);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .old-price {
+            text-decoration: line-through;
+            color: #888;
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+
+        .new-price {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: var(--gold);
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+        }
+
+        .price-currencies {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid rgba(255, 0, 0, 0.2);
+        }
+
+        .currency-price {
+            text-align: center;
+        }
+
+        .currency-label {
+            font-size: 0.75rem;
+            color: #888;
+            text-transform: uppercase;
+        }
+
+        .currency-value {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .order-btn {
+            width: 100%;
+            background: linear-gradient(45deg, #25d366, #128c7e);
+            border: none;
+            color: #fff;
+            padding: 12px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .order-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4);
+        }
+
+        /* Account Samples Section */
+        .acc-samples {
+            background: linear-gradient(180deg, rgba(139, 0, 0, 0.1), transparent);
+        }
+
+        .acc-range {
+            text-align: center;
+            font-size: 1.3rem;
+            color: var(--gold);
+            margin-bottom: 40px;
+            font-weight: 700;
+        }
+
+        .acc-card .product-image {
+            height: 250px;
+        }
+
+        .sample-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(45deg, var(--primary-red), var(--dark-red));
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            z-index: 2;
+        }
+
+        /* Gaming Accessories */
+        .gear-card .product-image {
+            height: 220px;
+            object-fit: cover;
+        }
+
+        /* Payment Methods */
+        .payment-section {
+            background: linear-gradient(180deg, transparent, rgba(139, 0, 0, 0.2));
+        }
+
+        .payment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .payment-card {
+            background: linear-gradient(145deg, rgba(26, 0, 0, 0.9), rgba(10, 0, 0, 0.9));
+            border: 2px solid rgba(255, 0, 0, 0.3);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .payment-card:hover {
+            border-color: var(--primary-red);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(255, 0, 0, 0.2);
+        }
+
+        .payment-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: var(--primary-red);
+        }
+
+        .payment-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .payment-detail {
+            color: #aaa;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .payment-detail span {
+            color: var(--gold);
+            font-weight: 700;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(90deg, rgba(139, 0, 0, 0.3), rgba(10, 0, 0, 0.9), rgba(139, 0, 0, 0.3));
+            border-top: 2px solid var(--primary-red);
+            padding: 50px 30px 30px;
+            margin-top: 80px;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--primary-red);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .footer-section p, .footer-section a {
+            color: #aaa;
+            text-decoration: none;
+            line-height: 1.8;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--primary-red);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 0, 0, 0.2);
+            color: #666;
+        }
+
+        /* Floating WhatsApp */
+        .float-whatsapp {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(45deg, #25d366, #128c7e);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 1.8rem;
+            cursor: pointer;
+            z-index: 999;
+            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4);
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .float-whatsapp:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 30px rgba(37, 211, 102, 0.6);
+        }
+
+        /* Sign In Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            background: linear-gradient(145deg, #1a0000, #0a0a0a);
+            border: 2px solid var(--primary-red);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 450px;
+            width: 90%;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(255, 0, 0, 0.3);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .modal-close:hover {
+            color: var(--primary-red);
+        }
+
+        .modal h2 {
+            font-family: 'Orbitron', sans-serif;
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--primary-red);
+        }
+
+        .signin-options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .signin-option {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .signin-option:hover {
+            background: rgba(255, 0, 0, 0.1);
+            border-color: var(--primary-red);
+            transform: translateX(5px);
+        }
+
+        .signin-option i {
+            font-size: 1.5rem;
+            width: 30px;
+            text-align: center;
+        }
+
+        .signin-option.google i { color: #ea4335; }
+        .signin-option.email i { color: var(--primary-red); }
+        .signin-option.phone i { color: #25d366; }
+
+        /* RTL Support */
+        [dir="rtl"] .nav-container {
+            flex-direction: row-reverse;
+        }
+
+        [dir="rtl"] .nav-links {
+            flex-direction: row-reverse;
+        }
+
+        [dir="rtl"] .hero-stats {
+            flex-direction: row-reverse;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .slogan { font-size: 1.1rem; }
+            .nav-links { display: none; }
+            .section-title { font-size: 1.8rem; }
+            .product-grid { grid-template-columns: 1fr; }
+            .price-currencies { flex-direction: column; gap: 5px; }
+            .wa-channel-banner { flex-direction: column; text-align: center; }
+        }
+
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--black);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(var(--primary-red), var(--dark-red));
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-red);
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">GENTLE PUBG STORE</div>
+            <div class="nav-links">
+                <a href="#uc" data-en="UC Store" data-ar="متجر UC" data-fr="Boutique UC">UC Store</a>
+                <a href="#accounts" data-en="Accounts" data-ar="حسابات" data-fr="Comptes">Accounts</a>
+                <a href="#gear" data-en="Gaming Gear" data-ar="معدات الألعاب" data-fr="Équipement">Gaming Gear</a>
+                <a href="#payment" data-en="Payment" data-ar="الدفع" data-fr="Paiement">Payment</a>
+                <div class="lang-switcher">
+                    <button class="lang-btn active" onclick="setLanguage('en')">EN</button>
+                    <button class="lang-btn" onclick="setLanguage('ar')">AR</button>
+                    <button class="lang-btn" onclick="setLanguage('fr')">FR</button>
+                </div>
+                <button class="signin-btn" onclick="openModal()">
+                    <i class="fas fa-user"></i> <span data-en="Sign In" data-ar="تسجيل الدخول" data-fr="Connexion">Sign In</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>GENTLE PUBG STORE</h1>
+            <p class="slogan" data-en="Go East Go West, Gentle Store is the Best" data-ar="اذهب شرقاً أو غرباً، جينتل ستور هو الأفضل" data-fr="Allez à l'Est ou à l'Ouest, Gentle Store est le Meilleur">
+                Go East Go West, Gentle Store is the Best
+            </p>
+
+            <!-- WhatsApp Channel Banner -->
+            <div class="wa-channel-banner">
+                <div class="wa-channel-info">
+                    <i class="fab fa-whatsapp"></i>
+                    <div class="wa-channel-text">
+                        <h3>Join Our WhatsApp Channel</h3>
+                        <p>Get latest updates, deals & new arrivals!</p>
+                    </div>
+                </div>
+                <a href="https://chat.whatsapp.com/CZXJ6LKvPBH0nMzAHUP4fa?mode=gi_t" class="wa-channel-btn" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Join Channel
+                </a>
+            </div>
+
+            <div class="hero-stats">
+                <div class="stat">
+                    <div class="stat-number">10K+</div>
+                    <div class="stat-label" data-en="Happy Customers" data-ar="عملاء سعداء" data-fr="Clients Satisfaits">Happy Customers</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">50K+</div>
+                    <div class="stat-label" data-en="UC Sold" data-ar="UC مباع" data-fr="UC Vendus">UC Sold</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">80+</div>
+                    <div class="stat-label" data-en="Account Collections" data-ar="مجموعات الحسابات" data-fr="Collections de Comptes">Account Collections</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label" data-en="Support" data-ar="دعم" data-fr="Support">Support</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- UC Store Section -->
+        <section id="uc" class="section">
+            <h2 class="section-title" data-en="UC STORE" data-ar="متجر UC" data-fr="BOUTIQUE UC">UC STORE</h2>
+            <div class="product-grid">
+                <div class="product-card">
+                    <img src="https://cdn.bynogame.com/games/3-1705351350573.webp" alt="60 UC" class="product-image">
+                    <div class="product-info">
+                        <div class="product-name">60 UC</div>
+                        <div class="product-desc" data-en="Starter Pack - Perfect for beginners" data-ar="حزمة البداية - مثالية للمبتدئين" data-fr="Pack Débutant - Parfait pour les débutants">Starter Pack - Perfect for beginners</div>
+                        <div class="price-tag">
+                            <div class="old-price"><s>1.000 f</s></div>
+                            <div class="new-price">800 f</div>
+                            <div class="price-currencies">
+                                <div class="currency-price">
+                                    <div class="currency-label">USD</div>
+                                    <div class="currency-value">$1.30</div>
+                                </div>
+                                <div class="currency-price">
+                                    <div class="currency-label">Naira</div>
+                                    <div class="currency-value">₦2,000</div>
+                                </div>
+                                <div class="currency-price">
+                                    <div class="currency-label">FCFA</div>
+                                    <div class="currency-value">800 f</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="https://wa.me/2349055815848?text=I%20want%20to%20buy%2060%20UC%20(800f%20/%20$1.30%20/%20₦2,000)%20from%20Gentle%20PUBG%20Store" class="order-btn" target="_blank">
+                            <i class="fab fa-whatsapp"></i> <span data-en="Order Now" data-ar="اطلب الآن" data-fr="Commander">Order Now</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="https://static.gamsgocdn.com/image/d455694aa79f008202c572a08501ae35.webp" alt="325 UC" class="product-image">
+                    <div class="product-info">
+                        <div class="product-name">325 UC</div>
+                        <div class="product-desc" data-en="Popular Choice - Best value for money" data-ar="الاختيار الشعبي - أفضل قيمة مقابل السعر" data-fr="Choix Populaire - Meilleur rapport qualité-prix">Popular Choice - Best value for money</div>
+                        <div class="price-tag">
+                            <div class="old-price"><s>4.000 f</s></div>
+                            <div class="new-price">3.800 f</div>
+                            <div class="price-currencies">
+                                <div class="currency-price">
+                                    <div class="currency-label">USD</div>
+                                    <div class="currency-value">$6.15</div>
+                                </div>
+                                <div class="currency-price">
+                                    <div class="currency-label">Naira</div>
+                                    <div class="currency-value">₦9,500</div>
+                                </div>
+                                <div class="currency-price">
+                                    <div class="currency-label">FCFA</div>
+                                    <div class="currency-value">3.800 f</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="https://wa.me/2349055815848?text=I%20want%20to%20buy%20325%20UC%20(3.800f%20/%20$6.15%20/%20₦9,500)%20from%20Gentle%20PUBG%20Store" class="order-btn" target="_blank">
+                            <i class="fab fa-whatsapp"></i> <span data-en="Order Now" data-ar="اطلب الآن" data-fr="Commander">Order Now</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="https://cdn.bynogame.com/games/3-1705351350573.webp" alt="660 UC" class="product-image">
+                    <div class="product-info">
+                        <div class="product-name">660 UC</div>
+                        <div class="product-desc" data-en="Advanced Pack + Bonus 30 UC" data-ar="حزمة متقدمة + 30 UC مجانية" data-fr="Pack Avancé + 30 UC Bonus">Advanced Pack + Bonus 30 UC</div>
+                        <div class="price-tag">
+                            <div class="old-price"><s>8.000 f</s></div>
+                            <div class="new-price">6.500 f</div>
+                            <div class="price-currencies">
+                                <div class="currency-price">
+                                    <div class="currency-label">USD</div>
+                                    <div class="currency-value">$10.55</div>
+                                </div>
+                                <div class="currency-price">
+                                    <div class="currency-label">Naira</div>
+                                    <div class="currency-value">₦16,250</div>
+                                </div>
+                                <div class="currency-price">
+                                    <div class="currency-label">FCFA</div>
+                                    <div class="currency-value">6.500 f</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="https://wa.me/2349055815848?text=I%20want%20to%20buy%20660%20UC%20(6.500f%20/%20$10.55%20/%20₦16,250)%20from%20Gentle%20PUBG%20Store" class="order-btn" target="_blank">
+                            <i class="fab fa-whatsapp"></i> <span data-en="Order Now" data-ar="اطلب الآن" data-fr="Commander">Order Now</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="https://static.gamsgocdn.com/image/d455694aa79f008202c572a08501ae35.webp" alt="1800 UC" class="product-image">
+                    <div class="product-info">
+                        <div class="product-name">1,800 UC</div>
+                        <div class="product-desc" data-en="Pro Pack + Bonus 100 UC" data-ar="حزمة محترفين + 100 UC مجانية" data-fr="Pack Pro + 100 UC Bonus">Pro Pack + Bonus 100 UC</div>
+                        <div class="price-tag">
+                            <div class="old-price"><s>18.000 f</s></div>
+                            <div class="new-price">15.000 f</div>
+                            <div class="price-currencies">
+                                <div class="currency-price">
+                                    <div class="currency-label">USD</div>
+                                    <div class="currency-value">$24.35</div>
+                                </div>
+                                <div class="currency-price">
+                                    <div class="currency-label">Naira</div>
+                                    <div class="currency-value">₦37,500</div>
+                                </div>
+                                <div class="currency-price">
+                                    <div class="currency-label">FCFA</div>
+                                    <div class="currency-value">15.000 f</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="https://wa.me/2349055815848?text=I%20want%20to%20buy%201800%20UC%20(15.000f%20/%20$24.35%20/%20₦37,500)%20from%20Gentle%20PUBG%20Store" class="order-btn" target="_blank">
+                            <i class="fab fa-whatsapp"></i> <span data-en="Order Now" data-ar="اطلب الآن" data-fr="Commander">Order Now</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="https://cdn.bynogame.com/games/3-1705351350573.webp" alt="3850 UC" class="product-image">
+                    <div class="product-info">
+                        <div class="product-name">3,850 UC</div>
+                        <div class="product-desc" data-en="Elite Pack + Bonus 250 UC" data-ar="حزمة النخبة + 250 UC مجانية" data-fr="Pack Élite + 250 UC Bonus">Elite Pack + Bonus 250 UC</div>
+                        <div class="price-tag">
+                            <div class="old-price"><s>31.000 f</s></div>
+                            <div class="new-price">28.500 f</div>
+                            <div class="price-currencies">
+                                <div class="currency-price">
+                                    <div class="currency-label">USD</div>
+                                    <div class="currency-value">$46.25</div>
+                                </div>
+                                <div class="currency-price">
+                                    <div class="currency-label">Naira</div>
+                                    <div class="currency-value">₦71,250</div>
+                                </div>
+                                <div class="currency-price">
+                                    <div class="currency-label">FCFA</div>
+                                    <div class="currency-value">28.500 f</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="https://wa.me/2349055815848?text=I%20want%20to%20buy%203850%20UC%20(28.500f%20/%20$46.25%20/%20₦71,250)%20from%20Gentle%20PUBG%20Store" class="order-btn" target="_blank">
+                            <i class="fab fa-whatsapp"></i> <span data-en="Order Now" data-ar="اطلب الآن" data-fr="Commander">Order Now</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="https://static.gamsgocdn.com/image/d455694aa79f008202c572a08501ae35.webp" alt="8100 UC" class="product-image">
+                    <div class="product-info">
+                        <div class="product-name">8,100 UC</div>
+                        <div class="product-desc" data-en="Legend Pack + Bonus 500 UC" data-ar="حزمة الأسطورة + 500 UC مجانية" data-fr="Pack Légende + 500 UC Bonus">Legend Pack + Bonus 500 UC</div>
+                        <div class="price-tag">
+                            <div class="old-price"><s>57.500 f</s></div>
+                            <div class="new-price">55.000 f</div>
+                            <div class="price-currencies">
+                                <div class="currency-price">
+                                    <div class="currency-label">USD</div>
+                                    <div class="currency-value">$89.35</div>
+                                </div>
+                                <div class="currency-price">
+                                    <div class="currency-label">Naira</div>
+                                    <div class="currency-value">₦137,500</div>
+                                </div>
+                                <div class="currency-price">
+                                    <div class="currency-label">FCFA</div>
+                                    <div class="currency-value">55.000 f</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="https://wa.me/2349055815848?text=I%20want%20to%20buy%208100%20UC%20(55.000f%20/%20$89.35%20/%20₦137,500)%20from%20Gentle%20PUBG%20Store" class="order-btn" target="_blank">
+                            <i class="fab fa-whatsapp"></i> <span data-en="Order Now" data-ar="اطلب الآن" data-fr="Commander">Order Now</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Account Samples Section -->
+        <section id="accounts" class="section acc-samples">
+            <h2 class="section-title" data-en="ACCOUNT SAMPLES" data-ar="عينات الحسابات" data-fr="ÉCHANTILLONS DE COMPTES">ACCOUNT SAMPLES</h2>
+            <p class="acc-range" data-en="Price Range: $50 - $3,000 | 80+ Collections Available | Contact for Pricing" data-ar="نطاق السعر: 50$ - 3000$ | 80+ مجموعة متاحة | تواصل للأسعار" data-fr="Gamme de Prix: 50$ - 3000$ | 80+ Collections Disponibles | Contactez pour les Prix">
+                Price Range: $50 - $3,000 | 80+ Collections Available | Contact for Pricing
+            </p>
+
+            <div class="product-grid">
+                <div class="product-card acc-card">
+                    <div class="sample-badge" data-en="SAMPLE" data-ar="عينة" data-fr="ÉCHANTILLON">SAMPLE</div>
+                    <img src="https://cdn.gameboost.com/accounts/1324517/gallery/conversions/b0f1ad0c-5648-4e4f-9ffc-a9a29cb90ca0-webp.webp?v=1746348976" alt="Account Sample 1" class="product-image">
+                    <div class="product-info">
+                        <div class="product-name">Mythic Account</div>
+                        <div class="product-desc" data-en="Rare skins, high rank, multiple mythic outfits" data-ar="جلود نادرة، رتبة عالية، زي أسطوري متعدد" data-fr="Skins rares, haut rang, tenues mythiques multiples">Rare skins, high rank, multiple mythic outfits</div>
+                        <a href="https://wa.me/2349055815848?text=I%20want%20to%20inquire%20about%20Mythic%20Account%20from%20Gentle%20PUBG%20Store" class="order-btn" target="_blank">
+                            <i class="fab fa-whatsapp"></i> <span data-en="Inquire Now" data-ar="استفسر الآن" data-fr="Renseignez-vous">Inquire Now</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="product-card acc-card">
+                    <div class="sample-badge" data-en="SAMPLE" data-ar="عينة" data-fr="ÉCHANTILLON">SAMPLE</div>
+                    <img src="https://th.bing.com/th/id/OIP.861LPFOa4QHEm_N6aeyjnwHaEK?w=298&h=180&c=7&r=0&o=7&pid=1.7&rm=3" alt="Account Sample 2" class="product-image">
+                    <div class="product-info">
+                        <div class="product-name">Conqueror Account</div>
+                        <div class="product-desc" data-en="Conqueror tier, exclusive weapons, premium crates" data-ar="مستوى الفاتح، أسلحة حصرية، صناديق مميزة" data-fr="Niveau Conquérant, armes exclusives, caisses premium">Conqueror tier, exclusive weapons, premium crates</div>
+                        <a href="https://wa.me/2349055815848?text=I%20want%20to%20inquire%20about%20Conqueror%20Account%20from%20Gentle%20PUBG%20Store" class="order-btn" target="_blank">
+                            <i class="fab fa-whatsapp"></i> <span data-en="Inquire Now" data-ar="استفسر الآن" data-fr="Renseignez-vous">Inquire Now</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="product-card acc-card">
+                    <div class="sample-badge" data-en="SAMPLE" data-ar="عينة" data-fr="ÉCHANTILLON">SAMPLE</div>
+                    <img src="https://media.karousell.com/media/photos/products/2024/7/1/pubg_acc_can_swap_or_buy_acc_s_1719836805_a0a50e51.jpg" alt="Account Sample 3" class="product-image">
+                    <div class="product-info">
+                        <div class="product-name">Jackpot Account</div>
+                        <div class="product-desc" data-en="Ultimate collection, all rare items, maxed out" data-ar="مجموعة نهائية، جميع العناصر النادرة، كامل" data-fr="Collection ultime, tous les objets rares, maxé">Ultimate collection, all rare items, maxed out</div>
+                        <a href="https://wa.me/2349055815848?text=I%20want%20to%20inquire%20about%20Jackpot%20Account%20from%20Gentle%20PUBG%20Store" class="order-btn" target="_blank">
+                            <i class="fab fa-whatsapp"></i> <span data-en="Inquire Now" data-ar="استفسر الآن" data-fr="Renseignez-vous">Inquire Now</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="product-card acc-card">
+                    <div class="sample-badge" data-en="SAMPLE" data-ar="عينة" data-fr="ÉCHANTILLON">SAMPLE</div>
+                    <img src="https://i.ytimg.com/vi/VBt9ifKefs0/maxresdefault.jpg" alt="Account Sample 4" class="product-image">
+                    <div class="product-info">
+                        <div class="product-name">Starter Account</div>
+                        <div class="product-desc" data-en="Good starter with decent skins and rank" data-ar="بداية جيدة مع جلود ورتبة لائقة" data-fr="Bon départ avec skins et rang décent">Good starter with decent skins and rank</div>
+                        <a href="https://wa.me/2349055815848?text=I%20want%20to%20inquire%20about%20Starter%20Account%20from%20Gentle%20PUBG%20Store" class="order-btn" target="_blank">
+                            <i class="fab fa-whatsapp"></i> <span data-en="Inquire Now" data-ar="استفسر الآن" data-fr="Renseignez-vous">Inquire Now</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gaming Gear Section -->
+        <section id="gear" class="section">
+            <h2 class="section-title" data-en="GAMING GEAR" data-ar="معدات الألعاب" data-fr="ÉQUIPEMENT DE JEU">GAMING GEAR</h2>
+            <div class="product-grid">
+                <div class="product-card gear-card">
+                    <img src="https://m.media-amazon.com/images/I/819QERY6FOL._SL1500_.jpg" alt="Phone Cooler" class="product-image">
+                    <div class="product-info">
+                        <div class="product-name">Phone Cooler</div>
+                        <div class="product-desc" data-en="Keep your phone cool during intense gaming sessions" data-ar="حافظ على هاتفك باردًا أثناء جلسات الألعاب المكثفة" data-fr="Gardez votre téléphone frais pendant les sessions de jeu intenses">Keep your phone cool during intense gaming sessions</div>
+                        <a href="https://wa.me/2349055815848?text=I%20want%20to%20buy%20Phone%20Cooler%20from%20Gentle%20PUBG%20Store" class="order-btn" target="_blank">
+                            <i class="fab fa-whatsapp"></i> <span data-en="Order Now" data-ar="اطلب الآن" data-fr="Commander">Order Now</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="product-card gear-card">
+                    <img src="https://m.media-amazon.com/images/I/612mkE+Kx7L._AC_.jpg" alt="Thumb Sleeves" class="product-image">
+                    <div class="product-info">
+                        <div class="product-name">Thumb Sleeves</div>
+                        <div class="product-desc" data-en="Anti-sweat finger sleeves for better control" data-ar="أكمام أصابع مضادة للعرق للتحكم الأفضل" data-fr="Manchons anti-transpiration pour un meilleur contrôle">Anti-sweat finger sleeves for better control</div>
+                        <a href="https://wa.me/2349055815848?text=I%20want%20to%20buy%20Thumb%20Sleeves%20from%20Gentle%20PUBG%20Store" class="order-btn" target="_blank">
+                            <i class="fab fa-whatsapp"></i> <span data-en="Order Now" data-ar="اطلب الآن" data-fr="Commander">Order Now</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="product-card gear-card">
+                    <img src="https://static0.gamerantimages.com/wordpress/wp-content/uploads/2023/06/jbl-quantum-910-wireless-gaming-headset.jpg" alt="Gaming Headset" class="product-image">
+                    <div class="product-info">
+                        <div class="product-name">Gaming Headset</div>
+                        <div class="product-desc" data-en="Surround sound headset for immersive gameplay" data-ar="سماعة رأس بصوت محيطي لتجربة لعب غامرة" data-fr="Casque surround pour un gameplay immersif">Surround sound headset for immersive gameplay</div>
+                        <a href="https://wa.me/2349055815848?text=I%20want%20to%20buy%20Gaming%20Headset%20from%20Gentle%20PUBG%20Store" class="order-btn" target="_blank">
+                            <i class="fab fa-whatsapp"></i> <span data-en="Order Now" data-ar="اطلب الآن" data-fr="Commander">Order Now</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="product-card gear-card">
+                    <img src="https://static0.gamerantimages.com/wordpress/wp-content/uploads/2023/08/razerhammerheadprohyperspeed.jpg" alt="Gaming Earbuds" class="product-image">
+                    <div class="product-info">
+                        <div class="product-name">Gaming Earbuds</div>
+                        <div class="product-desc" data-en="Low latency wireless earbuds for mobile gaming" data-ar="سماعات أذن لاسلكية ذات تأخير منخفض للألعاب المحمولة" data-fr="Écouteurs sans fil à faible latence pour le jeu mobile">Low latency wireless earbuds for mobile gaming</div>
+                        <a href="https://wa.me/2349055815848?text=I%20want%20to%20buy%20Gaming%20Earbuds%20from%20Gentle%20PUBG%20Store" class="order-btn" target="_blank">
+                            <i class="fab fa-whatsapp"></i> <span data-en="Order Now" data-ar="اطلب الآن" data-fr="Commander">Order Now</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Payment Methods Section -->
+        <section id="payment" class="section payment-section">
+            <h2 class="section-title" data-en="PAYMENT METHODS" data-ar="طرق الدفع" data-fr="MODES DE PAIEMENT">PAYMENT METHODS</h2>
+            <div class="payment-grid">
+                <div class="payment-card">
+                    <div class="payment-icon"><i class="fas fa-money-bill-wave"></i></div>
+                    <div class="payment-name">WAVE</div>
+                    <div class="payment-detail">
+                        <span data-en="Number:" data-ar="الرقم:" data-fr="Numéro:">Number:</span> +227 80 85 47 57<br>
+                        <span data-en="Currency:" data-ar="العملة:" data-fr="Devise:">Currency:</span> FCFA
+                    </div>
+                </div>
+                <div class="payment-card">
+                    <div class="payment-icon"><i class="fas fa-mobile-alt"></i></div>
+                    <div class="payment-name">OPAY</div>
+                    <div class="payment-detail">
+                        <span data-en="Number:" data-ar="الرقم:" data-fr="Numéro:">Number:</span> 9055815848<br>
+                        <span data-en="Currency:" data-ar="العملة:" data-fr="Devise:">Currency:</span> Naira
+                    </div>
+                </div>
+                <div class="payment-card">
+                    <div class="payment-icon"><i class="fab fa-bitcoin"></i></div>
+                    <div class="payment-name">BINANCE</div>
+                    <div class="payment-detail">
+                        <span data-en="ID:" data-ar="المعرف:" data-fr="ID:">ID:</span> 872516837<br>
+                        <span data-en="Currency:" data-ar="العملة:" data-fr="Devise:">Currency:</span> USD ($)
+                    </div>
+                </div>
+                <div class="payment-card">
+                    <div class="payment-icon"><i class="fas fa-coins"></i></div>
+                    <div class="payment-name">MY NITA</div>
+                    <div class="payment-detail">
+                        <span data-en="WhatsApp:" data-ar="واتساب:" data-fr="WhatsApp:">WhatsApp:</span> +234 905 581 5848<br>
+                        <span data-en="Currency:" data-ar="العملة:" data-fr="Devise:">Currency:</span> FCFA
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Gentle PUBG Store</h3>
+                <p data-en="Your trusted source for PUBG Mobile UC, premium accounts, and gaming accessories." data-ar="مصدرك الموثوق لـ UC ببجي موبايل، الحسابات المتميزة، وملحقات الألعاب." data-fr="Votre source de confiance pour UC PUBG Mobile, comptes premium et accessoires de jeu.">
+                    Your trusted source for PUBG Mobile UC, premium accounts, and gaming accessories.
+                </p>
+            </div>
+            <div class="footer-section">
+                <h3 data-en="Quick Links" data-ar="روابط سريعة" data-fr="Liens Rapides">Quick Links</h3>
+                <p><a href="#uc">UC Store</a></p>
+                <p><a href="#accounts">Accounts</a></p>
+                <p><a href="#gear">Gaming Gear</a></p>
+                <p><a href="#payment">Payment Methods</a></p>
+            </div>
+            <div class="footer-section">
+                <h3 data-en="Contact" data-ar="اتصل" data-fr="Contact">Contact</h3>
+                <p><i class="fas fa-envelope" style="color: var(--primary-red);"></i> Gentlestore000@gmail.com</p>
+                <p><i class="fab fa-whatsapp" style="color: #25d366;"></i> +234 905 581 5848</p>
+                <p data-en="Available 24/7 for orders and inquiries" data-ar="متاح 24/7 للطلبات والاستفسارات" data-fr="Disponible 24/7 pour commandes et demandes">Available 24/7 for orders and inquiries</p>
+            </div>
+            <div class="footer-section">
+                <h3 data-en="Trust" data-ar="الثقة" data-fr="Confiance">Trust</h3>
+                <p><i class="fas fa-shield-alt" style="color: var(--primary-red);"></i> <span data-en="Secure Payments" data-ar="مدفوعات آمنة" data-fr="Paiements Sécurisés">Secure Payments</span></p>
+                <p><i class="fas fa-check-circle" style="color: var(--primary-red);"></i> <span data-en="Instant Delivery" data-ar="تسليم فوري" data-fr="Livraison Instantanée">Instant Delivery</span></p>
+                <p><i class="fas fa-headset" style="color: var(--primary-red);"></i> <span data-en="24/7 Support" data-ar="دعم 24/7" data-fr="Support 24/7">24/7 Support</span></p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p> Gentle PUBG Store - Go East Go West, Gentle Store is the Best</p>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/2349055815848?text=Hello%20Gentle%20PUBG%20Store!" class="float-whatsapp" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Sign In Modal -->
+    <div class="modal-overlay" id="signinModal">
+        <div class="modal">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <h2 data-en="Sign In" data-ar="تسجيل الدخول" data-fr="Connexion">Sign In</h2>
+            <div class="signin-options">
+                <a href="#" class="signin-option google">
+                    <i class="fab fa-google"></i>
+                    <span data-en="Continue with Google" data-ar="المتابعة مع جوجل" data-fr="Continuer avec Google">Continue with Google</span>
+                </a>
+                <a href="#" class="signin-option email">
+                    <i class="fas fa-envelope"></i>
+                    <span data-en="Continue with Email" data-ar="المتابعة بالبريد الإلكتروني" data-fr="Continuer avec Email">Continue with Email</span>
+                </a>
+                <a href="#" class="signin-option phone">
+                    <i class="fas fa-phone"></i>
+                    <span data-en="Continue with Phone" data-ar="المتابعة بالهاتف" data-fr="Continuer avec Téléphone">Continue with Phone</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentLang = 'en';
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            document.documentElement.lang = lang;
+            document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+
+            document.querySelectorAll('[data-en]').forEach(el => {
+                el.textContent = el.getAttribute('data-' + lang);
+            });
+
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+
+        function openModal() {
+            document.getElementById('signinModal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('signinModal').classList.remove('active');
+        }
+
+        document.getElementById('signinModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
